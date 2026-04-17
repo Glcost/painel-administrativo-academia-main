@@ -1,4 +1,3 @@
-Aqui está seu **README com badges + GIF + deploy**:
 
 ---
 
