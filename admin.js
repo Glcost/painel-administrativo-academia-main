@@ -400,6 +400,18 @@ function editarCliente(cpf) {
         formTitle.textContent = "Editar Cliente";
         btnCancelar.classList.remove('hidden');
 
+
+        // Verificar se CPF já existe (apenas para novo cadastro)
+        const cpfExiste = clientes.some(c =>
+            String(c.cpf) === novoCpf && String(c.cpf) !== String(cpfOriginal)
+        );
+
+        if (cpfExiste) {
+            mostrarNotificacao("Já existe outro cliente com este CPF.", 'error');
+            return;
+        }
+
+
         // Scroll para o formulário
         document.querySelector('.sticky').scrollIntoView({ behavior: 'smooth' });
     }
