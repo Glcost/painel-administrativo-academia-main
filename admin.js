@@ -209,7 +209,7 @@ async function alternarStatus(cpf, statusAtual) {
 // Função auxiliar para mostrar notificações
 function mostrarNotificacao(mensagem, tipo = 'info') {
     const cores = {
-        success: 'bg-green-500',
+        success: 'bg-yellow-500',
         error: 'bg-red-500',
         info: 'bg-blue-500'
     };
@@ -352,12 +352,13 @@ clienteForm.addEventListener('submit', async (e) => {
     }
 
     // Verificar se CPF já existe (apenas para novo cadastro)
-    if (!cpfOriginal) {
-        const cpfExiste = clientes.some(c => String(c.cpf) === novoCpf);
-        if (cpfExiste) {
-            mostrarNotificacao("Já existe um cliente com este CPF.", 'error');
-            return;
-        }
+    const cpfExiste = clientes.some(c =>
+        String(c.cpf) === novoCpf && String(c.cpf) !== String(cpfOriginal)
+    );
+
+    if (cpfExiste) {
+        mostrarNotificacao("Já existe outro cliente com este CPF.", 'error');
+        return;
     }
 
     const clienteData = { nome: nome, cpf: novoCpf };
